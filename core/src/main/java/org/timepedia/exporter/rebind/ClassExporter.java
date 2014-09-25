@@ -143,6 +143,7 @@ public class ClassExporter {
       boolean hasParams = method.getExportableParameters().length > 0;
       
       // We use the first JavascriptObject in the function for applying the closure
+      
       String apply = "null";
       for (int i = 0, l = method.getExportableParameters().length; i < l ; i++) {
         if (xTypeOracle.isJavaScriptObject(method.getExportableParameters()[i].getParam().getType())) {
@@ -179,7 +180,7 @@ public class ClassExporter {
       sw.println("]);");
       boolean isArray = retType != null && retType instanceof JExportableArrayType;
       if (retType != null && retType.needsExport() && !isVoid && !isArray) {
-        sw.println("return r == undefined ? null : r != null ? r.g : r");
+        sw.println("return r == undefined ? null : r");
       } else if (isBoolean) {
         sw.println("return !!r;");
       } else if (isPrimitive) {
